@@ -1,20 +1,50 @@
 /********************************selection**************************** */
 var product = document.getElementsByClassName('product'); console.log(product);
 var price = document.querySelectorAll('.price'); console.log(price);
-var quantity = document.querySelectorAll('.quantity'); console.log(quantity);
+var quantity = document.getElementsByClassName('quantity'); console.log(quantity);
 var buttonincrement = document.getElementsByClassName('incrementBtn'); console.log(buttonincrement);
 var buttondecrement = document.getElementsByClassName('decrementBtn'); console.log(buttondecrement);
 var likeicone = document.querySelectorAll('.fa-heart'); console.log(likeicone);
 var trashicone = document.querySelectorAll(".fa-trash"); console.log(trashicone);
+/************************************************************** */
+
+var quantityValue=[];
+for(let i = 0; i < quantity.length; i++){
+     quantityValue[i]= parseInt(quantity[i].innerHTML);
+}
+console.log (quantityValue)
+
+var priceValue=[];
+for(let i = 0; i < price.length; i++){
+     priceValue[i]= parseInt(price[i].innerHTML);
+}
+console.log (priceValue)
+
+
+/************************updateTotal****************************** */
+
+function total() {
+    let total = 0;
+    for (let i = 0; i < product.length; i++) {
+        total+= quantityValue[i]*priceValue[i];
+    }
+    return document.getElementById('total').innerText = total;
+}
+/******************************************************** */
+total();
+
+
 /*************************delete******************************* */
-for (let trash of trashicone) {
-    trash.addEventListener('click' , function () {
+
+for (let i in trashicone) {
+    trashicone[i].onclick= function () {
        // console.log(i);
 
-        trash.closest('.product').remove();
+       trashicone[i].closest('.product').remove();
+       quantityValue[i]=0;
         total() 
         console.log(total())
-    })
+    }
 }
 /**************************like****************************** */
 
@@ -29,20 +59,6 @@ for (let like of likeicone) {
 
 }
 
-
-/************************************************************** */
-
-var quantityValue=[];
-for(let i = 0; i < quantity.length; i++){
-     quantityValue[i]= parseInt(quantity[i].innerHTML);
-}
-console.log (quantityValue)
-
-var priceValue=[];
-for(let i = 0; i < price.length; i++){
-     priceValue[i]= parseInt(price[i].innerHTML);
-}
-console.log (priceValue)
 
 
 /***************************incrementation **************** */
@@ -73,15 +89,5 @@ for (let i = 0; i < buttondecrement.length; i++) {
 }
 
 
-/************************updateTotal****************************** */
 
 
-function total() {
-    let total = 0;
-    for (let i = 0; i < price.length; i++) {
-        total+= quantityValue[i]*priceValue[i];
-    }
-    return document.getElementById('total').innerText = total;
-}
-/******************************************************** */
-total();
