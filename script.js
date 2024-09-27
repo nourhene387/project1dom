@@ -1,5 +1,5 @@
 /********************************selection**************************** */
-var product = document.querySelectorAll('.product'); console.log(product);
+var product = document.getElementsByClassName('product'); console.log(product);
 var price = document.querySelectorAll('.price'); console.log(price);
 var quantity = document.querySelectorAll('.quantity'); console.log(quantity);
 var buttonincrement = document.getElementsByClassName('incrementBtn'); console.log(buttonincrement);
@@ -7,13 +7,14 @@ var buttondecrement = document.getElementsByClassName('decrementBtn'); console.l
 var likeicone = document.querySelectorAll('.fa-heart'); console.log(likeicone);
 var trashicone = document.querySelectorAll(".fa-trash"); console.log(trashicone);
 /*************************delete******************************* */
-for (let i in trashicone) {
-    trashicone[i].onclick = function () {
-        console.log(i);
+for (let trash of trashicone) {
+    trash.addEventListener('click' , function () {
+       // console.log(i);
 
-        trashicone[i].closest('.product').remove();
-        total()
-    }
+        trash.closest('.product').remove();
+        total() 
+        console.log(total())
+    })
 }
 /**************************like****************************** */
 
@@ -77,7 +78,7 @@ for (let i = 0; i < buttondecrement.length; i++) {
 
 function total() {
     let total = 0;
-    for (let i = 0; i < quantity.length; i++) {
+    for (let i = 0; i < price.length; i++) {
         total+= quantityValue[i]*priceValue[i];
     }
     return document.getElementById('total').innerText = total;
